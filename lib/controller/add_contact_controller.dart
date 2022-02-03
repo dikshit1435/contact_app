@@ -1,33 +1,20 @@
 import 'package:dio_practice/modal/contact.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddContactInList extends GetxController {
+   late SharedPreferences  sharedPreferences;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+
+
   List contacts = <Contact>[
     // Default Data for test view ,Delete,Edit Feature
-    Contact(
-      userName: 'Dikshit',
-      phoneNo: '9988529029',
-      fatherName: 'Satpal Sharma',
-      motherName: 'Simple Sharma',
-      emailAddress: 'dikshit.d.k.2002@gmail.com',
-      location: 'Ludhiana',
-    ),
-    Contact(
-      userName: 'Dikshit',
-      phoneNo: '9988529029',
-      fatherName: 'Satpal Sharma',
-      motherName: 'Simple Sharma',
-      emailAddress: 'dikshit.d.k.2002@gmail.com',
-      location: 'Ludhiana',
-    ),
-    Contact(
-      userName: 'Dikshit',
-      phoneNo: '9988529029',
-      fatherName: 'Satpal Sharma',
-      motherName: 'Simple Sharma',
-      emailAddress: 'dikshit.d.k.2002@gmail.com',
-      location: 'Ludhiana',
-    ),
+
   ].obs;
 
   //  Add New Element in Contact Data Model

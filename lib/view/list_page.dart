@@ -1,5 +1,4 @@
 import 'package:dio_practice/View/view_detail.dart';
-import 'package:dio_practice/modal/contact.dart';
 import 'package:dio_practice/view/add_or_edit_contact.dart';
 import 'package:dio_practice/controller/EditingController.dart';
 import 'package:dio_practice/controller/add_contact_controller.dart';
@@ -7,12 +6,15 @@ import 'package:dio_practice/controller/validation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class ListPage extends StatelessWidget {
   final contactsController =
       Get.put(AddContactInList()); //For Using ContactList Data
   final editController = Get.put(
       EditContact()); // For implementing edit functionality on Edit Button
 final validationController = Get.put(ValidationController());
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +58,8 @@ final validationController = Get.put(ValidationController());
                       IconButton(
                         onPressed: () {
                           contactsController.contacts.removeAt(
-                              index); // Deleting Element From the List
+                              index);
+                          validationController.deleteData();// Deleting Element From the List
                         },
                         icon: Icon(Icons.delete),
                       ),

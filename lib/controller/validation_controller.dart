@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:dio_practice/controller/EditingController.dart';
+import 'package:dio_practice/modal/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
 import 'add_contact_controller.dart';
 
 class ValidationController extends GetxController {
@@ -9,6 +12,7 @@ class ValidationController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final contactController = Get.find<AddContactInList>();
   final editController = Get.find<EditContact>();
+  final dataStorage = GetStorage();
 
   late TextEditingController userNameController,
       numberController,
@@ -41,7 +45,12 @@ class ValidationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    Map<String,dynamic>jsondatais = jsonDecode(dataStorage.read('contactData'));
+  Contact contact = Contact.fromJson(jsondatais);
 
+  if(jsondatais.isNotEmpty){
+    contactController.addContact(contact.userName!, contact.phoneNo!, contact.fatherName!, contact.motherName!, contact.emailAddress!, contact.location!);
+  }
   }
 
   @override
@@ -133,6 +142,16 @@ class ValidationController extends GetxController {
     }
     return null;
   }
+  void storedData(){
+    Contact contact = Contact(userName:userName,fatherName: fName,motherName: mName,location:address,emailAddress: email,phoneNo: number);
+    String contactData = jsonEncode(contact);
+    dataStorage.write('contactData', contactData);
+    // contactController.sharedPreferences.setString('contactData', contactData);
+  print(contactData);
+  }
+  void deleteData(){
+    dataStorage.remove('contactdata');
+  }
 
 // Function for add or edit data in Database
   void addData() async {
@@ -149,7 +168,7 @@ class ValidationController extends GetxController {
     if (editController.isEdit.value == false) {
       contactController.addContact(
           userName, number, fName, mName, address, email);
-
+       storedData();
       Get.back();
     } else {
       final isValid = loginFormKey.currentState!
@@ -160,6 +179,8 @@ class ValidationController extends GetxController {
       }
       loginFormKey.currentState!.save();
      contactController.updateContact(userName, number, fName, mName, email, address, editController.index);
+      storedData();
+
    Get.back();
     }
   }
