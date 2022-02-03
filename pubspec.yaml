@@ -39,7 +39,7 @@ dependencies:
   form_field_validator: ^1.1.0
   get: any
   shared_preferences: any
-  get_storage:
+  get_storage: any
 
 
 dev_dependencies:

@@ -5,14 +5,16 @@ import 'package:dio_practice/controller/add_contact_controller.dart';
 import 'package:dio_practice/controller/validation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
+import 'package:dio_practice/services/textEditingController.dart';
+TextController textController = TextController();
 class ListPage extends StatelessWidget {
+
+  final validationController = Get.put(ValidationController());
   final contactsController =
       Get.put(AddContactInList()); //For Using ContactList Data
   final editController = Get.put(
       EditContact()); // For implementing edit functionality on Edit Button
-final validationController = Get.put(ValidationController());
+
 
 
   @override
@@ -49,7 +51,7 @@ final validationController = Get.put(ValidationController());
                               index]); // Sending Contact List Data with index to EditController
                          editController.index= index;
                          print(editController.index);
-                          validationController.createController();
+                          textController.createController();
                           Get.to(AddContact());
 
                         },
@@ -58,8 +60,8 @@ final validationController = Get.put(ValidationController());
                       IconButton(
                         onPressed: () {
                           contactsController.contacts.removeAt(
-                              index);
-                          validationController.deleteData();// Deleting Element From the List
+                              index);// Deleting Element From the List
+                        validationController.saveTodo();
                         },
                         icon: Icon(Icons.delete),
                       ),
@@ -73,7 +75,7 @@ final validationController = Get.put(ValidationController());
         onPressed: () {
           editController.isEdit.value =
               false; // Change Status isEdit Boolean into False
-               validationController.createController();
+          textController.createController();
           Get.to(AddContact());
         },
         child: Icon(Icons.add),
