@@ -1,3 +1,4 @@
+import 'package:dio_practice/constant/constants.dart';
 import 'package:dio_practice/services/control_text.dart';
 import 'package:dio_practice/view/view_detail.dart';
 import 'package:dio_practice/view/add_or_edit_contact.dart';
@@ -25,7 +26,6 @@ class ListPage extends StatelessWidget {
               itemCount: addContactsController.contacts.length,
               itemBuilder: (context, index)
               {
-
                 return ListTile(
                   onTap: () {
                     Get.to(ContactDetail(
@@ -35,15 +35,17 @@ class ListPage extends StatelessWidget {
                   title: Text('${addContactsController.contacts[index].userName}'),
                   subtitle:
                       Text('${addContactsController.contacts[index].phoneNo}'),
-                  leading: const CircleAvatar(child: Icon(Icons.person)),
+                  leading:  CircleAvatar(child: Text('${addContactsController.contacts[index].userName[0]}',style: kContactlogo)),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         onPressed: () {
-                          Get.to(AddContact(index:index,),arguments: true,);
-                          controlText.createController(addContactsController.contacts[
+                          controlText.createEditController(addContactsController.contacts[
                           index]);
+                          Get.to(AddContact(index,),arguments: true,);
+
+
                         },
                         icon: Icon(Icons.edit),
                       ),
@@ -63,9 +65,9 @@ class ListPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+           controlText.createController();
+          Get.to(AddContact(''),arguments: false);
 
-          Get.to(AddContact(index: 0,),arguments: false);
-          controlText.createController(addContactsController.contacts[0]);
 
 
         },

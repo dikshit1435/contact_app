@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Contact {
   String? userName;
   String? phoneNo;
@@ -12,7 +14,10 @@ class Contact {
       this.motherName,
       this.emailAddress,
       this.phoneNo,
-      this.location});
+      this.location,
+      });
+
+
 
 // Function to convert List into json Data
   toJson() => {

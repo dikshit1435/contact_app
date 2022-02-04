@@ -8,7 +8,6 @@ class ValidationController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final contactController = Get.find<AddContactInList>();
 
-  ControlText controlText = ControlText();
   late TextEditingController userNameController,
       numberController,
       fNameController,
@@ -21,17 +20,24 @@ class ValidationController extends GetxController {
   var mName;
   var address;
   var email;
+  ControlText controlText = ControlText();
 
+@override
+  void onInit() {
+    // TODO: implement onInit
+  super.onInit();
 
-
+  }
   @override
   void onReady() {
     super.onReady();
+    controlText.createController();
   }
 
   @override
   void onClose() {
     controlText.closeController();
+
   }
 
 
@@ -104,6 +110,7 @@ void addData() {
     contactController.addContact(
         userName, number, fName, mName, email, address);
     contactController.saveTodo();
+    controlText.clearController();
     Get.back();
   }
 
@@ -112,7 +119,10 @@ void addData() {
      contactController.updateContact(
          userName, number, fName, mName, email, address, index);
      contactController.saveTodo();
+     controlText.clearController();
+
      Get.back();
+
    }
 
 

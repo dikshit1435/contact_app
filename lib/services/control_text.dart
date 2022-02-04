@@ -6,31 +6,31 @@ import 'package:get/get.dart';
 final validationController = Get.find<ValidationController>();
 class ControlText {
 
-  void createController(Contact contact) {
+  void  createController() {
+    validationController.userNameController = TextEditingController(text: null);
+    validationController.numberController = TextEditingController(text: null);
+    validationController.fNameController = TextEditingController(text:null);
+    validationController.mNameController =TextEditingController(text: null);
+    validationController.addressController = TextEditingController(text: null);
+    validationController.emailController =TextEditingController(text: null);
+  }
+  void createEditController(Contact contact) {
     validationController.userNameController = TextEditingController(
-        text: Get.arguments
-            ? '${contact.userName}'
-            : null);
+        text:'${contact.userName}'
+            );
     validationController.numberController = TextEditingController(
-        text: Get.arguments
-            ? '${contact.phoneNo}'
-            : null);
+        text:'${contact.phoneNo}'
+            );
     validationController.fNameController = TextEditingController(
-        text: Get.arguments
-            ? '${contact.fatherName}'
-            : null);
+        text: '${contact.fatherName}'
+    );
     validationController.mNameController = TextEditingController(
-        text: Get.arguments
-            ? '${contact.motherName}'
-            : null);
+        text:
+             '${contact.motherName}');
     validationController.addressController = TextEditingController(
-        text: Get.arguments
-            ? '${contact.location}'
-            : null);
+        text: '${contact.location}');
     validationController.emailController = TextEditingController(
-        text: Get.arguments
-            ? '${contact.emailAddress}'
-            : null);
+        text: '${contact.emailAddress}');
   }
   void closeController() {
     validationController.userNameController.dispose();
@@ -39,5 +39,13 @@ class ControlText {
     validationController.mNameController.dispose();
     validationController.addressController.dispose();
     validationController.emailController.dispose();
+  }
+  void clearController(){
+    validationController.userNameController.clear();
+    validationController.numberController.clear();
+    validationController.fNameController.clear();
+    validationController.mNameController.clear();
+    validationController.addressController.clear();
+    validationController.emailController.clear();
   }
 }

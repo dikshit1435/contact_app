@@ -1,13 +1,14 @@
 import 'package:dio_practice/constant/constants.dart';
+import 'package:dio_practice/services/control_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio_practice/controller/validation_controller.dart';
 
 class AddContact extends StatelessWidget {
   final controller = Get.find<ValidationController>();
-  final int index;
-
-  AddContact({required this.index});
+  final  index;
+ControlText controlText = ControlText();
+  AddContact(this.index);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,9 +172,15 @@ class AddContact extends StatelessWidget {
                       ),
                       onPressed: () {
                         controller.validateTextField();
-                        Get.arguments
-                            ? controller.editContact(index)
-                            : controller.addData();
+
+                        if(Get.arguments==true) {
+                          controller.editContact(index);
+
+                        }
+                        else
+                          {
+                            controller.addData();
+                          }
                       },
                     ),
                   ),
