@@ -1,7 +1,6 @@
-import 'package:dio_practice/services/control_text_controller.dart';
+import 'package:dio_practice/services/control_text.dart';
 import 'package:dio_practice/view/view_detail.dart';
 import 'package:dio_practice/view/add_or_edit_contact.dart';
-import 'package:dio_practice/controller/editingController.dart';
 import 'package:dio_practice/controller/add_contact_controller.dart';
 import 'package:dio_practice/controller/validation_controller.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,8 @@ import 'package:get/get.dart';
 
 class ListPage extends StatelessWidget {
    //For Using ContactList Data
-  final contactsController =
+  final addContactsController =
   Get.find<AddContactInList>();
-  final editController = Get.find
-      <EditContact>(); // For implementing edit functionality on Edit Button
   final validationController = Get.find<ValidationController>();
   ControlText controlText = ControlText();
 
@@ -25,39 +22,36 @@ class ListPage extends StatelessWidget {
       body: Material(
         child: Obx(() {
           return ListView.builder(
-              itemCount: contactsController.contacts.length,
-              itemBuilder: (context, index) {
+              itemCount: addContactsController.contacts.length,
+              itemBuilder: (context, index)
+              {
+
                 return ListTile(
                   onTap: () {
                     Get.to(ContactDetail(
-                        contact: contactsController.contacts[
+                        contact: addContactsController.contacts[
                             index])); // On Tap Go to View Detail Page to Show All Element in List
                   },
-                  title: Text('${contactsController.contacts[index].userName}'),
+                  title: Text('${addContactsController.contacts[index].userName}'),
                   subtitle:
-                      Text('${contactsController.contacts[index].phoneNo}'),
-                  leading: CircleAvatar(child: const Icon(Icons.person)),
+                      Text('${addContactsController.contacts[index].phoneNo}'),
+                  leading: const CircleAvatar(child: Icon(Icons.person)),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         onPressed: () {
-                          editController.isEdit.value =
-                              true; //Change Status of isEdit boolean into true
-                          editController.GetList(contactsController.contacts[
-                              index]); // Sending Contact List Data with index to EditController
-                          editController.index = index;
-                          print(editController.index);
-                          controlText.createController();
-                          Get.to(AddContact());
+                          Get.to(AddContact(index:index,),arguments: true,);
+                          controlText.createController(addContactsController.contacts[
+                          index]);
                         },
                         icon: Icon(Icons.edit),
                       ),
                       IconButton(
                         onPressed: () {
-                          contactsController.contacts.removeAt(
+                          addContactsController.contacts.removeAt(
                               index); // Deleting Element From the List
-                          validationController.saveTodo();
+                          addContactsController.saveTodo();
                         },
                         icon: Icon(Icons.delete),
                       ),
@@ -69,10 +63,11 @@ class ListPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          editController.isEdit.value =
-              false; // Change Status isEdit Boolean into False
-          controlText.createController();
-          Get.to(AddContact());
+
+          Get.to(AddContact(index: 0,),arguments: false);
+          controlText.createController(addContactsController.contacts[0]);
+
+
         },
         child: Icon(Icons.add),
       ),

@@ -11,7 +11,7 @@ class ContactDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contact Detail"),
+        title: const Text("Contact Detail"),
         centerTitle: true,
       ),
       body: Column(
@@ -24,44 +24,44 @@ class ContactDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Name", style: kTextStyle1),
+                const Text("Name", style: kTextStyle1),
                 Text('${contact.userName}', style: kTextStyle2),
-                Divider(
+                const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
-                Text("Father Name", style: kTextStyle1),
+                const Text("Father Name", style: kTextStyle1),
                 Text('${contact.fatherName}', style: kTextStyle2),
-                Divider(
+                const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
-                Text("Mother Name", style: kTextStyle1),
+                const Text("Mother Name", style: kTextStyle1),
                 Text('${contact.motherName}', style: kTextStyle2),
-                Divider(
+                const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
-                Text("Contact", style: kTextStyle1),
+                const Text("Contact", style: kTextStyle1),
                 Text('${contact.phoneNo}', style: kTextStyle2),
-                Divider(
+                const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
-                Text("E-mail", style: kTextStyle1),
+                const Text("E-mail", style: kTextStyle1),
                 Text('${contact.emailAddress}', style: kTextStyle2),
-                Divider(
+                const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
-                Text("Address", style: kTextStyle1),
+                const Text("Address", style: kTextStyle1),
                 Text('${contact.location}', style: kTextStyle2),
-                Divider(
+                const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
