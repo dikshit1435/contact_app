@@ -1,11 +1,13 @@
-import 'package:dio_practice/controller/EditingController.dart';
+import 'package:dio_practice/controller/editingController.dart';
 import 'package:dio_practice/controller/validation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class TextController{
-  final editController = Get.find<EditContact>();
- final validationController = Get.find<ValidationController>();
-  void createController(){
+
+final validationController = Get.find<ValidationController>();
+final editController = Get.find<EditContact>();
+
+class ControlText {
+  void createController() {
     validationController.userNameController = TextEditingController(
         text: editController.isEdit.value
             ? '${editController.contactList.userName}'
@@ -18,11 +20,11 @@ class TextController{
         text: editController.isEdit.value
             ? '${editController.contactList.fatherName}'
             : null);
-    validationController. mNameController = TextEditingController(
+    validationController.mNameController = TextEditingController(
         text: editController.isEdit.value
             ? '${editController.contactList.motherName}'
             : null);
-    validationController. addressController = TextEditingController(
+    validationController.addressController = TextEditingController(
         text: editController.isEdit.value
             ? '${editController.contactList.location}'
             : null);
@@ -31,13 +33,4 @@ class TextController{
             ? '${editController.contactList.emailAddress}'
             : null);
   }
-  void destroyController(){
-    validationController.userNameController.dispose();
-    validationController.numberController.dispose();
-    validationController.fNameController.dispose();
-    validationController.mNameController.dispose();
-    validationController.addressController.dispose();
-    validationController.emailController.dispose();
-    }
 }
-

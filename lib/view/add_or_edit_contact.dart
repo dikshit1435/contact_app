@@ -1,9 +1,9 @@
 import 'package:dio_practice/constant/constants.dart';
-import 'package:dio_practice/controller/EditingController.dart';
+import 'package:dio_practice/controller/editingController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio_practice/controller/validation_controller.dart';
-import 'package:dio_practice/services/textEditingController.dart';
+
 
 class AddContact extends StatelessWidget {
   final editController = Get.find<EditContact>();

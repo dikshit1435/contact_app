@@ -1,21 +1,20 @@
-import 'package:dio_practice/View/view_detail.dart';
+import 'package:dio_practice/services/control_text_controller.dart';
+import 'package:dio_practice/view/view_detail.dart';
 import 'package:dio_practice/view/add_or_edit_contact.dart';
-import 'package:dio_practice/controller/EditingController.dart';
+import 'package:dio_practice/controller/editingController.dart';
 import 'package:dio_practice/controller/add_contact_controller.dart';
 import 'package:dio_practice/controller/validation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio_practice/services/textEditingController.dart';
-TextController textController = TextController();
+
 class ListPage extends StatelessWidget {
-
-  final validationController = Get.put(ValidationController());
+   //For Using ContactList Data
   final contactsController =
-      Get.put(AddContactInList()); //For Using ContactList Data
-  final editController = Get.put(
-      EditContact()); // For implementing edit functionality on Edit Button
-
-
+  Get.find<AddContactInList>();
+  final editController = Get.find
+      <EditContact>(); // For implementing edit functionality on Edit Button
+  final validationController = Get.find<ValidationController>();
+  ControlText controlText = ControlText();
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +26,12 @@ class ListPage extends StatelessWidget {
         child: Obx(() {
           return ListView.builder(
               itemCount: contactsController.contacts.length,
-
               itemBuilder: (context, index) {
                 return ListTile(
                   onTap: () {
                     Get.to(ContactDetail(
                         contact: contactsController.contacts[
                             index])); // On Tap Go to View Detail Page to Show All Element in List
-
                   },
                   title: Text('${contactsController.contacts[index].userName}'),
                   subtitle:
@@ -49,19 +46,18 @@ class ListPage extends StatelessWidget {
                               true; //Change Status of isEdit boolean into true
                           editController.GetList(contactsController.contacts[
                               index]); // Sending Contact List Data with index to EditController
-                         editController.index= index;
-                         print(editController.index);
-                          textController.createController();
+                          editController.index = index;
+                          print(editController.index);
+                          controlText.createController();
                           Get.to(AddContact());
-
                         },
                         icon: Icon(Icons.edit),
                       ),
                       IconButton(
                         onPressed: () {
                           contactsController.contacts.removeAt(
-                              index);// Deleting Element From the List
-                        validationController.saveTodo();
+                              index); // Deleting Element From the List
+                          validationController.saveTodo();
                         },
                         icon: Icon(Icons.delete),
                       ),
@@ -75,7 +71,7 @@ class ListPage extends StatelessWidget {
         onPressed: () {
           editController.isEdit.value =
               false; // Change Status isEdit Boolean into False
-          textController.createController();
+          controlText.createController();
           Get.to(AddContact());
         },
         child: Icon(Icons.add),

@@ -1,15 +1,13 @@
 import 'dart:convert';
-import 'package:dio_practice/controller/EditingController.dart';
+import 'package:dio_practice/controller/editingController.dart';
 import 'package:dio_practice/modal/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'add_contact_controller.dart';
-import 'package:dio_practice/services/textEditingController.dart';
 
 class ValidationController extends GetxController {
-  TextController textController = TextController();
   Dio dio = new Dio();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final contactController = Get.find<AddContactInList>();
@@ -22,15 +20,13 @@ class ValidationController extends GetxController {
       mNameController,
       addressController,
       emailController;
-
   var userName;
   var number;
   var fName;
   var mName;
   var address;
   var email;
-
-  // For Inserting Data in Api
+// For Inserting Data in Api
   Future postData() async {
     try {
       final String pathurl = 'https://jsonplaceholder.typicode.com/posts';
@@ -59,9 +55,15 @@ class ValidationController extends GetxController {
 
   @override
   void onClose() {
-    textController.destroyController();
+    userNameController.dispose();
+    numberController.dispose();
+    fNameController.dispose();
+    mNameController.dispose();
+    addressController.dispose();
+    emailController.dispose();
   }
 
+  //  Read Data from list & add Contact  into contact list
   setupContact() {
     String stringContact = dataStorage.read('contactData');
     if (stringContact.isNotEmpty) {
@@ -72,6 +74,7 @@ class ValidationController extends GetxController {
     }
   }
 
+// Write data items of contact into List
   void saveTodo() {
     List items = contactController.contacts.map((e) => e.toJson()).toList();
     dataStorage.write('contactData', jsonEncode(items));
@@ -124,15 +127,8 @@ class ValidationController extends GetxController {
     }
     return null;
   }
-  // void storedData(){
-  //   Contact contact = Contact(userName:userName,fatherName: fName,motherName: mName,location:address,emailAddress: email,phoneNo: number);
-  //   String contactData = jsonEncode(contact);
-  //   dataStorage.write('contactData', contactData);
-  //   // contactController.sharedPreferences.setString('contactData', contactData);
-  // print(contactData);
-  // }
 
-// Function for add or edit data in Database
+// Function for validate & add or edit data in Database
   void addData() async {
     final isValid = loginFormKey.currentState!
         .validate(); // isValid for checking all textfield are validate
@@ -142,6 +138,7 @@ class ValidationController extends GetxController {
     }
     loginFormKey.currentState!
         .save(); // If all textfield is validate then save formfield  data
+
     await postData().then((value) => print(value));
     // if else statement for check user is coming for edit contact or add new contact
     if (editController.isEdit.value == false) {
@@ -150,9 +147,7 @@ class ValidationController extends GetxController {
       saveTodo();
       Get.back();
     } else {
-      final isValid = loginFormKey.currentState!
-          .validate(); // isValid for checking all textfield are validate
-// If not then return nothing
+      final isValid = loginFormKey.currentState!.validate();
       if (!isValid) {
         return;
       }
