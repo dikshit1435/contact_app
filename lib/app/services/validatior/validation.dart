@@ -1,45 +1,20 @@
-import 'package:dio_practice/services/control_text.dart';
+import 'package:dio_practice/app/controller/home_controller.dart';
+import 'package:dio_practice/app/modal/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'add_contact_controller.dart';
 
-class ValidationController extends GetxController {
 
+class Validation {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  final contactController = Get.find<AddContactInList>();
+  final contactController = Get.find<HomeController>();
 
-  late TextEditingController userNameController,
-      numberController,
-      fNameController,
-      mNameController,
-      addressController,
-      emailController;
+
   var userName;
   var number;
   var fName;
   var mName;
   var address;
   var email;
-  ControlText controlText = ControlText();
-
-@override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-
-  }
-  @override
-  void onReady() {
-    super.onReady();
-    controlText.createController();
-  }
-
-  @override
-  void onClose() {
-
-
-  }
-
 
 // Function for validate userName
   String? validateUserName(String value) {
@@ -89,26 +64,29 @@ class ValidationController extends GetxController {
     return null;
   }
 
- // Function for validate & calling addContact and fill parameter with  TextField data
-void addData() {
-  final isValid = loginFormKey.currentState!
-      .validate(); // isValid for checking all textfield are validate
-// If not then return nothing
-  if (!isValid) {
-    return;
-  }
-  loginFormKey.currentState!
-      .save(); // If all textfield is validate then save formfield  data
-    contactController.addContact(
-
-        userName, number, fName, mName, email, address);
-    contactController.saveTodo();
-
-    Get.back();
+  void clearController() {
+    contactController.userNameController.clear();
+    contactController.numberController.clear();
+    contactController.fNameController.clear();
+    contactController.mNameController.clear();
+    contactController.addressController.clear();
+    contactController.emailController.clear();
   }
 
-  // Function for calling updateContact function  and fill parameter with  TextField data
-  void editContact(int index){
+
+
+  void createEditController(Contact contact) {
+    contactController.userNameController= TextEditingController(text: '${contact.userName}');
+    contactController.numberController  = TextEditingController(text:'${contact.phoneNo}');
+    contactController.fNameController = TextEditingController(text:'${contact.fatherName}');
+    contactController.mNameController    = TextEditingController(text:'${contact.motherName}');
+    contactController.addressController= TextEditingController(text:'${contact.location}');
+    contactController.emailController = TextEditingController(text: '${contact.emailAddress}');
+  }
+
+
+  // Function for validate & calling addContact and fill parameter with  TextField data
+  void addData() {
     final isValid = loginFormKey.currentState!
         .validate(); // isValid for checking all textfield are validate
 // If not then return nothing
@@ -117,16 +95,27 @@ void addData() {
     }
     loginFormKey.currentState!
         .save(); // If all textfield is validate then save formfield  data
-     contactController.updateContact(
-         userName, number, fName, mName, email, address, index);
-     contactController.saveTodo();
+    contactController.addContact(
+        userName, number, fName, mName, email, address);
+    contactController.saveTodo();
 
+    Get.back();
+  }
 
-     Get.back();
-
-   }
-
-
+  // Function for calling updateContact function  and fill parameter with  TextField data
+  void editContact(int index) {
+    final isValid = loginFormKey.currentState!
+        .validate(); // isValid for checking all textfield are validate
+// If not then return nothing
+    if (!isValid) {
+      return;
     }
+    loginFormKey.currentState!
+        .save(); // If all textfield is validate then save formfield  data
+    contactController.updateContact(
+        userName, number, fName, mName, email, address, index);
+    contactController.saveTodo();
 
-
+    Get.back();
+  }
+}

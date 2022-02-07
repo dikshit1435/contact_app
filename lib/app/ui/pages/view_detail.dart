@@ -1,12 +1,10 @@
-import 'package:dio_practice/modal/contact.dart';
-import 'package:dio_practice/constant/constants.dart';
+import 'package:dio_practice/app/controller/home_controller.dart';
+import 'package:dio_practice/app/modal/contact.dart';
+import 'package:dio_practice/app/ui/constant/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ContactDetail extends StatelessWidget {
-  final Contact contact;
-
-  ContactDetail({Key? key, required this.contact}) : super(key: key);
-
+class ViewDetail extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,42 +23,42 @@ class ContactDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Name", style: kTextStyle1),
-                Text('${contact.userName}', style: kTextStyle2),
+                Text('${controller.contactDetail.userName}', style: kTextStyle2),
                 const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
                 const Text("Father Name", style: kTextStyle1),
-                Text('${contact.fatherName}', style: kTextStyle2),
+                Text('${controller.contactDetail.fatherName}', style: kTextStyle2),
                 const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
                 const Text("Mother Name", style: kTextStyle1),
-                Text('${contact.motherName}', style: kTextStyle2),
+                Text('${controller.contactDetail.motherName}', style: kTextStyle2),
                 const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
                 const Text("Contact", style: kTextStyle1),
-                Text('${contact.phoneNo}', style: kTextStyle2),
+                Text('${controller.contactDetail.phoneNo}', style: kTextStyle2),
                 const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
                 const Text("E-mail", style: kTextStyle1),
-                Text('${contact.emailAddress}', style: kTextStyle2),
+                Text('${controller.contactDetail.emailAddress}', style: kTextStyle2),
                 const Divider(
                   height: 30,
                   color: Colors.black,
                   endIndent: 5,
                 ),
                 const Text("Address", style: kTextStyle1),
-                Text('${contact.location}', style: kTextStyle2),
+                Text('${controller.contactDetail.location}', style: kTextStyle2),
                 const Divider(
                   height: 30,
                   color: Colors.black,

@@ -1,14 +1,16 @@
-import 'package:dio_practice/binding/all_binding.dart';
-import 'package:dio_practice/view/list_page.dart';
+import 'package:dio_practice/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'app/binding/homebinding.dart';
+import 'app/ui/pages/list_page.dart';
 
-void main() async {
-  await GetStorage.init();
-AllBinding().dependencies();
+
+void main()  {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(GetMaterialApp(
-    home: ListPage(),
+    debugShowCheckedModeBanner: false,
+    initialRoute: Routes.INITIAL,
+    getPages: AppPages.pages,
     title: 'Contact',
   ));
 }

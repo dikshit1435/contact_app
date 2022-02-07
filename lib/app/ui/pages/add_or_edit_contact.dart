@@ -1,20 +1,21 @@
-import 'package:dio_practice/constant/constants.dart';
-import 'package:dio_practice/services/control_text.dart';
+
+import 'package:dio_practice/app/controller/home_controller.dart';
+import 'package:dio_practice/app/services/validatior/validation.dart';
+import 'package:dio_practice/app/ui/constant/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio_practice/controller/validation_controller.dart';
 
-class AddContact extends StatelessWidget {
-  final controller = Get.find<ValidationController>();
-   int? index;
+class AddEditPage extends GetView<HomeController> {
 
-ControlText controlText = ControlText();
-  AddContact({this.index});
+  final contact = Get.find<HomeController>();
+  Validation validation = Validation();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Get.arguments ? ' Edit Contact'
+        title: Text(Get.arguments
+            ? ' Edit Contact'
             : 'Add Contact'), // If isEdit is true Show EditContact else Show Add Contact in AppBar Text
       ),
       body: SafeArea(
@@ -22,7 +23,7 @@ ControlText controlText = ControlText();
           margin: const EdgeInsets.only(top: 60, left: 16, right: 16),
           child: SingleChildScrollView(
             child: Form(
-              key: controller.loginFormKey,
+              key: validation.loginFormKey,
               child: Column(
                 children: [
                   const SizedBox(
@@ -37,12 +38,12 @@ ControlText controlText = ControlText();
                       prefixIcon: const Icon(Icons.person_pin_sharp),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: controller.userNameController,
+                    controller: contact.userNameController,
                     onSaved: (value) {
-                      controller.userName = value!;
+                      validation.userName = value!;
                     },
                     validator: (value) {
-                      return controller.validateUserName(value!);
+                      return validation.validateUserName(value!);
                     },
                   ),
                   const SizedBox(
@@ -58,12 +59,12 @@ ControlText controlText = ControlText();
                           const Icon(Icons.perm_contact_calendar_rounded),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: controller.fNameController,
+                    controller: contact.fNameController,
                     onSaved: (value) {
-                      controller.fName = value!;
+                      validation.fName = value!;
                     },
                     validator: (value) {
-                      return controller.validateFName(value!);
+                      return validation.validateFName(value!);
                     },
                   ),
                   const SizedBox(
@@ -78,13 +79,12 @@ ControlText controlText = ControlText();
                       prefixIcon: const Icon(Icons.person_pin_sharp),
                     ),
                     keyboardType: TextInputType.name,
-
-                    controller: controller.mNameController,
+                    controller: contact.mNameController,
                     onSaved: (value) {
-                      controller.mName = value!;
+                      validation.mName = value!;
                     },
                     validator: (value) {
-                      return controller.validateMName(value!);
+                      return validation.validateMName(value!);
                     },
                   ),
                   const SizedBox(
@@ -99,12 +99,12 @@ ControlText controlText = ControlText();
                       prefixIcon: const Icon(Icons.location_on),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: controller.addressController,
+                    controller: contact.addressController,
                     onSaved: (value) {
-                      controller.address = value!;
+                      validation.address = value!;
                     },
                     validator: (value) {
-                      return controller.validateAddress(value!);
+                      return validation.validateAddress(value!);
                     },
                   ),
                   const SizedBox(
@@ -119,12 +119,12 @@ ControlText controlText = ControlText();
                       prefixIcon: const Icon(Icons.email_outlined),
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    controller: controller.emailController,
+                    controller: contact.emailController,
                     onSaved: (value) {
-                      controller.email = value!;
+                      validation.email = value!;
                     },
                     validator: (value) {
-                      return controller.validateEmail(value!);
+                      return validation.validateEmail(value!);
                     },
                   ),
                   const SizedBox(
@@ -139,12 +139,12 @@ ControlText controlText = ControlText();
                       prefixIcon: const Icon(Icons.phone_iphone_sharp),
                     ),
                     keyboardType: TextInputType.phone,
-                    controller: controller.numberController,
+                    controller: contact.numberController,
                     onSaved: (value) {
-                      controller.number = value!;
+                      validation.number = value!;
                     },
                     validator: (value) {
-                      return controller.validateNumber(value!);
+                      return validation.validateNumber(value!);
                     },
                   ),
                   const SizedBox(
@@ -172,13 +172,10 @@ ControlText controlText = ControlText();
                             const TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       onPressed: () {
-                        Get.arguments?
-                          controller.editContact(index!)
-                          :controller.addData();
-                        controlText.clearController();
-
-
-
+                        Get.arguments
+                            ? validation.editContact(controller.index)
+                            : validation.addData();
+                        validation.clearController();
                       },
                     ),
                   ),
