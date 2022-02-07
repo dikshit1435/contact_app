@@ -6,15 +6,15 @@ import 'package:dio_practice/controller/validation_controller.dart';
 
 class AddContact extends StatelessWidget {
   final controller = Get.find<ValidationController>();
-  final  index;
+   int? index;
+
 ControlText controlText = ControlText();
-  AddContact(this.index);
+  AddContact({this.index});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Get.arguments
-            ? ' Edit Contact'
+        title: Text(Get.arguments ? ' Edit Contact'
             : 'Add Contact'), // If isEdit is true Show EditContact else Show Add Contact in AppBar Text
       ),
       body: SafeArea(
@@ -78,6 +78,7 @@ ControlText controlText = ControlText();
                       prefixIcon: const Icon(Icons.person_pin_sharp),
                     ),
                     keyboardType: TextInputType.name,
+
                     controller: controller.mNameController,
                     onSaved: (value) {
                       controller.mName = value!;
@@ -171,16 +172,13 @@ ControlText controlText = ControlText();
                             const TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       onPressed: () {
-                        controller.validateTextField();
+                        Get.arguments?
+                          controller.editContact(index!)
+                          :controller.addData();
+                        controlText.clearController();
 
-                        if(Get.arguments==true) {
-                          controller.editContact(index);
 
-                        }
-                        else
-                          {
-                            controller.addData();
-                          }
+
                       },
                     ),
                   ),

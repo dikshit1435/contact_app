@@ -7,12 +7,12 @@ final validationController = Get.find<ValidationController>();
 class ControlText {
 
   void  createController() {
-    validationController.userNameController = TextEditingController(text: null);
-    validationController.numberController = TextEditingController(text: null);
-    validationController.fNameController = TextEditingController(text:null);
-    validationController.mNameController =TextEditingController(text: null);
-    validationController.addressController = TextEditingController(text: null);
-    validationController.emailController =TextEditingController(text: null);
+    validationController.userNameController = TextEditingController();
+    validationController.numberController = TextEditingController();
+    validationController.fNameController = TextEditingController();
+    validationController.mNameController =TextEditingController();
+    validationController.addressController = TextEditingController();
+    validationController.emailController =TextEditingController();
   }
   void createEditController(Contact contact) {
     validationController.userNameController = TextEditingController(

@@ -17,8 +17,6 @@ class AddContactInList extends GetxController {
   // Write data items of contact into List
   List contacts = <Contact>[].obs;
 
-
-
   //  Add New Element in Contact Data Model
   addContact(
     String userName,

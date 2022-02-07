@@ -30,7 +30,7 @@ class ListPage extends StatelessWidget {
                   onTap: () {
                     Get.to(ContactDetail(
                         contact: addContactsController.contacts[
-                            index])); // On Tap Go to View Detail Page to Show All Element in List
+                        index])); // On Tap Go to View Detail Page to Show All Element in List
                   },
                   title: Text('${addContactsController.contacts[index].userName}'),
                   subtitle:
@@ -41,9 +41,9 @@ class ListPage extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
-                          controlText.createEditController(addContactsController.contacts[
-                          index]);
-                          Get.to(AddContact(index,),arguments: true,);
+                            controlText.createEditController(addContactsController.contacts[
+                            index]);
+                          Get.to(AddContact(index: index),arguments: true);
 
 
                         },
@@ -66,7 +66,7 @@ class ListPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
            controlText.createController();
-          Get.to(AddContact(''),arguments: false);
+          Get.to(AddContact(),arguments: false);
 
 
 

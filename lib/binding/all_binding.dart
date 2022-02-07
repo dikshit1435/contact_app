@@ -6,8 +6,8 @@ class AllBinding extends Bindings{
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(AddContactInList());
-    Get.put(ValidationController());
+    Get.lazyPut(() => AddContactInList());
+    Get.lazyPut(()=>ValidationController());
   }
 
 }

@@ -25,7 +25,7 @@ class ValidationController extends GetxController {
 @override
   void onInit() {
     // TODO: implement onInit
-  super.onInit();
+    super.onInit();
 
   }
   @override
@@ -36,7 +36,7 @@ class ValidationController extends GetxController {
 
   @override
   void onClose() {
-    controlText.closeController();
+
 
   }
 
@@ -89,10 +89,8 @@ class ValidationController extends GetxController {
     return null;
   }
 
-// Function for validate & add or edit data in Database
-
-
-  void validateTextField(){
+ // Function for validate & calling addContact and fill parameter with  TextField data
+void addData() {
   final isValid = loginFormKey.currentState!
       .validate(); // isValid for checking all textfield are validate
 // If not then return nothing
@@ -101,25 +99,28 @@ class ValidationController extends GetxController {
   }
   loginFormKey.currentState!
       .save(); // If all textfield is validate then save formfield  data
-}
-
-
-
- // Function for calling addContact and fill parameter with  TextField data
-void addData() {
     contactController.addContact(
+
         userName, number, fName, mName, email, address);
     contactController.saveTodo();
-    controlText.clearController();
+
     Get.back();
   }
 
   // Function for calling updateContact function  and fill parameter with  TextField data
   void editContact(int index){
+    final isValid = loginFormKey.currentState!
+        .validate(); // isValid for checking all textfield are validate
+// If not then return nothing
+    if (!isValid) {
+      return;
+    }
+    loginFormKey.currentState!
+        .save(); // If all textfield is validate then save formfield  data
      contactController.updateContact(
          userName, number, fName, mName, email, address, index);
      contactController.saveTodo();
-     controlText.clearController();
+
 
      Get.back();
 
