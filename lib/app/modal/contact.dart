@@ -1,4 +1,6 @@
 
+import 'package:flutter/cupertino.dart';
+
 class Contact {
   String? userName;
   String? phoneNo;
@@ -7,14 +9,14 @@ class Contact {
   String? emailAddress;
   String? location;
 
-  Contact(
-      {this.userName,
-      this.fatherName,
-      this.motherName,
-      this.emailAddress,
+  Contact({
+      this.userName,
+     this.fatherName,
+     this.motherName,
+     this.emailAddress,
       this.phoneNo,
-      this.location,
-      });
+     this.location,
+  });
 
 
 

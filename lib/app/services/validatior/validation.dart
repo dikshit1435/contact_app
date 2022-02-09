@@ -1,14 +1,9 @@
-import 'package:dio_practice/app/controller/home_controller.dart';
-import 'package:dio_practice/app/modal/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class Validation {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  final contactController = Get.find<HomeController>();
-
-
+  late bool isValid;
   var userName;
   var number;
   var fName;
@@ -64,58 +59,14 @@ class Validation {
     return null;
   }
 
-  void clearController() {
-    contactController.userNameController.clear();
-    contactController.numberController.clear();
-    contactController.fNameController.clear();
-    contactController.mNameController.clear();
-    contactController.addressController.clear();
-    contactController.emailController.clear();
-  }
-
-
-
-  void createEditController(Contact contact) {
-    contactController.userNameController= TextEditingController(text: '${contact.userName}');
-    contactController.numberController  = TextEditingController(text:'${contact.phoneNo}');
-    contactController.fNameController = TextEditingController(text:'${contact.fatherName}');
-    contactController.mNameController    = TextEditingController(text:'${contact.motherName}');
-    contactController.addressController= TextEditingController(text:'${contact.location}');
-    contactController.emailController = TextEditingController(text: '${contact.emailAddress}');
-  }
-
-
   // Function for validate & calling addContact and fill parameter with  TextField data
-  void addData() {
-    final isValid = loginFormKey.currentState!
+  void validateData() {
+    isValid = loginFormKey.currentState!
         .validate(); // isValid for checking all textfield are validate
-// If not then return nothing
+   // If not then return nothing
     if (!isValid) {
       return;
     }
-    loginFormKey.currentState!
-        .save(); // If all textfield is validate then save formfield  data
-    contactController.addContact(
-        userName, number, fName, mName, email, address);
-    contactController.saveTodo();
-
-    Get.back();
-  }
-
-  // Function for calling updateContact function  and fill parameter with  TextField data
-  void editContact(int index) {
-    final isValid = loginFormKey.currentState!
-        .validate(); // isValid for checking all textfield are validate
-// If not then return nothing
-    if (!isValid) {
-      return;
-    }
-    loginFormKey.currentState!
-        .save(); // If all textfield is validate then save formfield  data
-    contactController.updateContact(
-        userName, number, fName, mName, email, address, index);
-    contactController.saveTodo();
-
-    Get.back();
+    loginFormKey.currentState!.save();
   }
 }

@@ -35,7 +35,7 @@ Validation validation = Validation();
                     children: [
                       IconButton(
                         onPressed: () {
-                          validation.createEditController(controller.contacts[
+                          controller.createEditController(controller.contacts[
                           index]);
                          controller.editPage(index);
 
@@ -59,7 +59,7 @@ Validation validation = Validation();
       floatingActionButton: FloatingActionButton(
         onPressed: () {
            controller.createcontroller();
-           Get.toNamed(Routes.ADDOREDITPAGE,arguments:false);
+           Get.toNamed(Routes.addOrEditPage,arguments:false);
         },
         child: Icon(Icons.add),
       ),

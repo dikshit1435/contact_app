@@ -1,12 +1,11 @@
-
 import 'package:dio_practice/app/controller/home_controller.dart';
+import 'package:dio_practice/app/modal/contact.dart';
 import 'package:dio_practice/app/services/validatior/validation.dart';
 import 'package:dio_practice/app/ui/constant/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddEditPage extends GetView<HomeController> {
-
   final contact = Get.find<HomeController>();
   Validation validation = Validation();
 
@@ -172,10 +171,39 @@ class AddEditPage extends GetView<HomeController> {
                             const TextStyle(fontSize: 14, color: Colors.white),
                       ),
                       onPressed: () {
-                        Get.arguments
-                            ? validation.editContact(controller.index)
-                            : validation.addData();
-                        validation.clearController();
+                        if (Get.arguments == true) {
+                          validation.validateData();
+                          if (validation.isValid == true) {
+                            controller.updateContact(
+                                Contact(
+                                    userName: validation.userName,
+                                    phoneNo: validation.number,
+                                    fatherName: validation.fName,
+                                    motherName: validation.mName,
+                                    emailAddress: validation.email,
+                                    location: validation.address),
+                                controller.index);
+                          } else {
+                            return;
+                          }
+                        } else {
+                          validation.validateData();
+                          if (validation.isValid == true) {
+                            controller.addContact(Contact(
+                              userName: validation.userName,
+                              phoneNo: validation.number,
+                              fatherName: validation.fName,
+                              motherName: validation.mName,
+                              emailAddress: validation.email,
+                              location: validation.address,
+                            ));
+                          } else {
+                            return;
+                          }
+                        }
+
+                        controller.saveTodo();
+                        Get.back();
                       },
                     ),
                   ),

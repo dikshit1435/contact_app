@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
+
   late TextEditingController userNameController,
       numberController,
       fNameController,
@@ -27,35 +28,28 @@ class HomeController extends GetxController {
   late int index;
 
   //  Add New Element in Contact Data Model
-  addContact(
-    String userName,
-    String phoneNo,
-    String fatherName,
-    String motherName,
-    String email,
-    String address,
+  addContact(Contact contact,
   ) {
     contacts.add(Contact(
-      userName: userName,
-      phoneNo: phoneNo,
-      fatherName: fatherName,
-      motherName: motherName,
-      emailAddress: email,
-      location: address,
+      userName: contact.userName,
+      phoneNo: contact.phoneNo,
+      fatherName: contact.fatherName,
+      motherName: contact.motherName,
+      emailAddress: contact.emailAddress,
+      location: contact.location,
     ));
     update();
   }
 
 // Update data in Contact at particular index of contact List
-  updateContact(String userName, String phoneNo, String fatherName,
-      String motherName, String email, String address, int index) {
+  updateContact(Contact contact, int index) {
     contacts[index] = Contact(
-      userName: userName,
-      phoneNo: phoneNo,
-      fatherName: fatherName,
-      motherName: motherName,
-      emailAddress: email,
-      location: address,
+      userName: contact.userName,
+      phoneNo: contact.phoneNo,
+      fatherName: contact.fatherName,
+      motherName: contact.motherName,
+      emailAddress: contact.emailAddress,
+      location: contact.location,
     );
     update();
   }
@@ -99,15 +93,35 @@ class HomeController extends GetxController {
     emailController = TextEditingController();
   }
 
+  void createEditController(Contact contact) {
+    userNameController= TextEditingController(text: '${contact.userName}');
+    numberController  = TextEditingController(text:'${contact.phoneNo}');
+    fNameController = TextEditingController(text:'${contact.fatherName}');
+    mNameController    = TextEditingController(text:'${contact.motherName}');
+    addressController= TextEditingController(text:'${contact.location}');
+    emailController = TextEditingController(text: '${contact.emailAddress}');
+  }
+
+  void clearController() {
+    userNameController.clear();
+    numberController.clear();
+    fNameController.clear();
+    mNameController.clear();
+    addressController.clear();
+    emailController.clear();
+  }
+
+
+
 // viewpage function for routing of viewpage and pass Contact list to that page
   viewpage(contactsDetail) {
     this.contactDetail = contactsDetail;
-    Get.toNamed(Routes.VIEWPAGE);
+    Get.toNamed(Routes.viewPage);
   }
 
 // editPage function for routing of add_Edit_page and pass index data to that page
   editPage(index) {
     this.index = index;
-    Get.toNamed(Routes.ADDOREDITPAGE, arguments: true);
+    Get.toNamed(Routes.addOrEditPage, arguments: true);
   }
 }
