@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddEditPage extends GetView<HomeController> {
-  final contact = Get.find<HomeController>();
   Validation validation = Validation();
 
   @override
@@ -38,9 +37,9 @@ class AddEditPage extends GetView<HomeController> {
                       prefixIcon: const Icon(Icons.person_pin_sharp),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: contact.userNameController,
+                    controller: controller.userNameController,
                     onSaved: (value) {
-                      validation.userName = value!;
+                      controller.userNameController.text = value!;
                     },
                     validator: (value) {
                       return validation.validateUserName(value!);
@@ -59,9 +58,9 @@ class AddEditPage extends GetView<HomeController> {
                           const Icon(Icons.perm_contact_calendar_rounded),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: contact.fNameController,
+                    controller: controller.fNameController,
                     onSaved: (value) {
-                      validation.fName = value!;
+                      controller.fNameController.text = value!;
                     },
                     validator: (value) {
                       return validation.validateFName(value!);
@@ -79,9 +78,9 @@ class AddEditPage extends GetView<HomeController> {
                       prefixIcon: const Icon(Icons.person_pin_sharp),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: contact.mNameController,
+                    controller: controller.mNameController,
                     onSaved: (value) {
-                      validation.mName = value!;
+                      controller.mNameController.text = value!;
                     },
                     validator: (value) {
                       return validation.validateMName(value!);
@@ -100,9 +99,9 @@ class AddEditPage extends GetView<HomeController> {
                       prefixIcon: const Icon(Icons.location_on,),
                     ),
                     keyboardType: TextInputType.name,
-                    controller: contact.addressController,
+                    controller: controller.addressController,
                     onSaved: (value) {
-                      validation.address = value!;
+                      controller.addressController.text = value!;
                     },
                     validator: (value) {
                       return validation.validateAddress(value!);
@@ -120,9 +119,9 @@ class AddEditPage extends GetView<HomeController> {
                       prefixIcon: const Icon(Icons.email_outlined),
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    controller: contact.emailController,
+                    controller: controller.emailController,
                     onSaved: (value) {
-                      validation.email = value!;
+                      controller.emailController.text = value!;
                     },
                     validator: (value) {
                       return validation.validateEmail(value!);
@@ -145,9 +144,9 @@ class AddEditPage extends GetView<HomeController> {
                       prefixIcon: const Icon(Icons.phone_iphone_sharp),
                     ),
                     keyboardType: TextInputType.phone,
-                    controller: contact.numberController,
+                    controller: controller.numberController,
                     onSaved: (value) {
-                      validation.number = value!;
+                      controller.numberController.text = value!;
                     },
                     validator: (value) {
                       return validation.validateNumber(value!);
@@ -178,12 +177,12 @@ class AddEditPage extends GetView<HomeController> {
                           if (validation.isValid == true) {
                             controller.updateContact(
                                 Contact(
-                                    userName: validation.userName,
-                                    phoneNo: validation.number,
-                                    fatherName: validation.fName,
-                                    motherName: validation.mName,
-                                    emailAddress: validation.email,
-                                    location: validation.address),
+                                    userName: controller.userNameController.text,
+                                    phoneNo: controller.numberController.text,
+                                    fatherName: controller.fNameController.text,
+                                    motherName: controller.mNameController.text,
+                                    emailAddress: controller.emailController.text,
+                                    location: controller.addressController.text),
                                 controller.index);
                             controller.clearController();
                           } else {
@@ -193,13 +192,12 @@ class AddEditPage extends GetView<HomeController> {
                           validation.validateData();
                           if (validation.isValid == true) {
                             controller.addContact(Contact(
-                              userName: validation.userName,
-                              phoneNo: validation.number,
-                              fatherName: validation.fName,
-                              motherName: validation.mName,
-                              emailAddress: validation.email,
-                              location: validation.address,
-                            ));
+                                userName: controller.userNameController.text,
+                                phoneNo: controller.numberController.text,
+                                fatherName: controller.fNameController.text,
+                                motherName: controller.mNameController.text,
+                                emailAddress: controller.emailController.text,
+                                location: controller.addressController.text),);
                           } else {
                             return;
                           }

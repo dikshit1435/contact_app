@@ -4,12 +4,7 @@ import 'package:get/get.dart';
 class Validation {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late bool isValid;
-  var userName;
-  var number;
-  var fName;
-  var mName;
-  var address;
-  var email;
+
 
 // Function for validate userName
   String? validateUserName(String value) {

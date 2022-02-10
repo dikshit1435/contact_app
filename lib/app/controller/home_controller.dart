@@ -7,9 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
 
-
-
-
   late TextEditingController userNameController,
       numberController,
       fNameController,
@@ -18,9 +15,9 @@ class HomeController extends GetxController {
       emailController;
 
   @override
-  void onInit() {
-    super.onInit();
-    setupContact(); // Call Setup method on initialization
+  void onInit() async{
+    await setupContact(); // Call Setup method on initialization
+     super.onInit();
     createcontroller();// initialized textEditing Controller
   }
 
@@ -71,10 +68,17 @@ class HomeController extends GetxController {
     if (stringContact != '') {
       List contactList = jsonDecode(stringContact);
       for (var contact in contactList) {
-        contacts.add(Contact().fromJson(contact));
+        contacts.add(Contact(
+            userName: contact['userName'],
+            fatherName: contact['fatherName'],
+            motherName: contact['motherName'],
+            emailAddress: contact['emailAddress'],
+           phoneNo: contact['phoneNo'],
+          location: contact['location']
+        ));
       }
     } else {
-      return;
+     return;
     }
   }
 

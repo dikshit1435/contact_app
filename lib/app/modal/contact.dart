@@ -2,20 +2,20 @@
 import 'package:flutter/cupertino.dart';
 
 class Contact {
-  String? userName;
-  String? phoneNo;
-  String? fatherName;
-  String? motherName;
-  String? emailAddress;
-  String? location;
+  String userName;
+  String phoneNo;
+  String fatherName;
+  String motherName;
+  String emailAddress;
+  String location;
 
   Contact({
-      this.userName,
-     this.fatherName,
-     this.motherName,
-     this.emailAddress,
-      this.phoneNo,
-     this.location,
+    required this.userName,
+    required this.fatherName,
+    required this.motherName,
+    required this.emailAddress,
+    required this.phoneNo,
+    required this.location,
   });
 
 
@@ -30,14 +30,5 @@ class Contact {
         "location": location
       };
 
-  // Function convert json data into list
-  fromJson(json) {
-    return Contact(
-        userName: json['userName'],
-        phoneNo: json['phoneNo'],
-        fatherName: json['fatherName'],
-        motherName: json['motherName'],
-        emailAddress: json['emailAddress'],
-        location: json['location']);
-  }
+
 }
