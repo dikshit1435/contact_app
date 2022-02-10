@@ -9,3 +9,4 @@ const kTextStyle2 =
     TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black);
 const double kSizeBoxHeight = 16;
 const kContactlogo =TextStyle(fontSize: 20,color: Colors.white);
+const kMyColor = Colors.blueAccent;

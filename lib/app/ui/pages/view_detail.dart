@@ -1,5 +1,4 @@
 import 'package:dio_practice/app/controller/home_controller.dart';
-import 'package:dio_practice/app/modal/contact.dart';
 import 'package:dio_practice/app/ui/constant/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +8,7 @@ class ViewDetail extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kMyColor,
         title: const Text("Contact Detail"),
         centerTitle: true,
       ),
@@ -23,46 +23,40 @@ class ViewDetail extends GetView<HomeController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Name", style: kTextStyle1),
-                Text('${controller.contactDetail.userName}', style: kTextStyle2),
-                const Divider(
+                Text('${controller.contactDetail.userName}',
+                    style: kTextStyle2),
+                const SizedBox(
                   height: 30,
-                  color: Colors.black,
-                  endIndent: 5,
                 ),
                 const Text("Father Name", style: kTextStyle1),
-                Text('${controller.contactDetail.fatherName}', style: kTextStyle2),
-                const Divider(
+                Text('${controller.contactDetail.fatherName}',
+                    style: kTextStyle2),
+                const SizedBox(
                   height: 30,
-                  color: Colors.black,
-                  endIndent: 5,
                 ),
                 const Text("Mother Name", style: kTextStyle1),
-                Text('${controller.contactDetail.motherName}', style: kTextStyle2),
-                const Divider(
+                Text('${controller.contactDetail.motherName}',
+                    style: kTextStyle2),
+                const SizedBox(
                   height: 30,
-                  color: Colors.black,
-                  endIndent: 5,
                 ),
                 const Text("Contact", style: kTextStyle1),
                 Text('${controller.contactDetail.phoneNo}', style: kTextStyle2),
-                const Divider(
+                const SizedBox(
                   height: 30,
-                  color: Colors.black,
-                  endIndent: 5,
                 ),
                 const Text("E-mail", style: kTextStyle1),
-                Text('${controller.contactDetail.emailAddress}', style: kTextStyle2),
-                const Divider(
+                Text('${controller.contactDetail.emailAddress}',
+                    style: kTextStyle2),
+                const SizedBox(
                   height: 30,
-                  color: Colors.black,
-                  endIndent: 5,
                 ),
                 const Text("Address", style: kTextStyle1),
-                Text('${controller.contactDetail.location}', style: kTextStyle2),
-                const Divider(
+                Text('${controller.contactDetail.location}',
+                    style: kTextStyle2),
+                const SizedBox(
                   height: 30,
-                  color: Colors.black,
-                  endIndent: 5,
+
                 ),
               ],
             ),

@@ -7,6 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
 
+
+
+
   late TextEditingController userNameController,
       numberController,
       fNameController,
@@ -124,4 +127,5 @@ class HomeController extends GetxController {
     this.index = index;
     Get.toNamed(Routes.addOrEditPage, arguments: true);
   }
+
 }

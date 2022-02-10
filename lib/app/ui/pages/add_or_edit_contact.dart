@@ -13,6 +13,7 @@ class AddEditPage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kMyColor,
         title: Text(Get.arguments
             ? ' Edit Contact'
             : 'Add Contact'), // If isEdit is true Show EditContact else Show Add Contact in AppBar Text
@@ -91,11 +92,12 @@ class AddEditPage extends GetView<HomeController> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
+                      prefixIconColor: Colors.pink,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(kBorderRadius),
                       ),
                       labelText: "Address",
-                      prefixIcon: const Icon(Icons.location_on),
+                      prefixIcon: const Icon(Icons.location_on,),
                     ),
                     keyboardType: TextInputType.name,
                     controller: contact.addressController,
@@ -131,9 +133,14 @@ class AddEditPage extends GetView<HomeController> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
+                      focusColor: Colors.blueAccent,
+                      focusedBorder:OutlineInputBorder(
+                        borderSide: const BorderSide(color: kMyColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(kBorderRadius)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(kBorderRadius),
                       ),
+
                       labelText: "Phone no.",
                       prefixIcon: const Icon(Icons.phone_iphone_sharp),
                     ),
@@ -153,13 +160,8 @@ class AddEditPage extends GetView<HomeController> {
                     constraints: BoxConstraints.tightFor(width: context.width),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.lightBlue),
+                            MaterialStateProperty.all(kMyColor),
                         padding:
                             MaterialStateProperty.all(const EdgeInsets.all(14)),
                       ),
@@ -183,6 +185,7 @@ class AddEditPage extends GetView<HomeController> {
                                     emailAddress: validation.email,
                                     location: validation.address),
                                 controller.index);
+                            controller.clearController();
                           } else {
                             return;
                           }
